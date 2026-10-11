@@ -3,317 +3,743 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vito Brata Sadewa — Portofolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Vito Brata Sadewa — Portofolio Kreatif & Teknologi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --surface: #111827;
+            --surface-card: #1f2937;
+            --accent-primary: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Background Glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -20vh;
+            left: -20vw;
+            width: 60vw;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-primary);
+            letter-spacing: 0.5px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-primary);
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-main);
+            font-size: 1.4rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 960px;
+            margin: 120px auto 60px auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Hero Section */
+        .hero {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: var(--accent-glow);
+            filter: blur(50px);
+            z-index: 0;
+        }
+
+        .hero-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-primary);
+            object-fit: cover;
+            box-shadow: 0 0 20px var(--accent-glow);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-subtitle {
+            color: var(--accent-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* Media & Widget Grid */
+        .media-widgets {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .media-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .media-card img, 
+        .media-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .widget-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quote-box {
+            font-style: italic;
+            color: var(--text-main);
+            font-size: 0.95rem;
+            border-left: 3px solid var(--accent-primary);
+            padding-left: 14px;
+            margin-bottom: 15px;
+        }
+
+        .audio-box {
+            background: var(--surface-card);
+            padding: 12px 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .audio-box span {
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        .audio-box audio {
+            width: 100%;
+            height: 32px;
+        }
+
+        /* General Sections */
+        section {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h2 i {
+            color: var(--accent-primary);
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        /* Skills Layout: Specialized vs General */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .skill-group {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .skill-group.featured {
+            border-color: rgba(56, 189, 248, 0.3);
+            background: linear-gradient(145deg, var(--surface-card), rgba(56, 189, 248, 0.03));
+        }
+
+        .skill-group h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-group h3 span {
+            font-size: 0.75rem;
+            background: var(--accent-glow);
+            color: var(--accent-primary);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .tag i {
+            color: var(--accent-primary);
+        }
+
+        .tag:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding-left: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -17px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        /* Portfolio Cards */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .portfolio-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            transition: var(--transition);
+        }
+
+        .portfolio-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-4px);
+        }
+
+        .portfolio-card h3 {
+            font-size: 1.05rem;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .portfolio-card li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .portfolio-card li::before {
+            content: '▪';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+        }
+
+        /* Testimonials Grid */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .testimonial-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-author {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .contact-card h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .contact-card p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .contact-card a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 16px 20px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--surface);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+                transition: left 0.3s ease;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: block;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .media-widgets,
+            .skills-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Video Background -->
-    <video autoplay muted loop id="video-background" class="video-background">
-        <source src="bg.mp4" type="video/mp4">
-        Browser Anda tidak mendukung video HTML5.
-    </video>
-    <div class="video-overlay"></div>
 
     <!-- Navigation -->
-    <div class="nav-container">
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
+    <nav class="navbar">
+        <a href="#" class="nav-brand">VITO.DEV</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
         </button>
-        
-        <div class="topnav" id="topnav">
-            <a href="#tentang">Tentang</a>
-            <a href="#keahlian">Keahlian</a>
-            <a href="#organisasi">Organisasi</a>
-            <a href="#portofolio">Portofolio</a>
-            <a href="#kontak">Kontak</a>
-        </div>
-    </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#tentang">Tentang</a></li>
+            <li><a href="#keahlian">Keahlian</a></li>
+            <li><a href="#organisasi">Organisasi</a></li>
+            <li><a href="#portofolio">Portofolio</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+        </ul>
+    </nav>
 
     <div class="container">
-        <!-- Header -->
-        <header>
-            <img src="image/webbvx.png" alt="Vito Brata Sadewa">
-            <div class="header-text">
+        
+        <!-- Hero Header -->
+        <header class="hero">
+            <img src="image/webbvx.png" alt="Vito Brata Sadewa" class="hero-avatar">
+            <div class="hero-content">
                 <h1>Vito Brata Sadewa</h1>
-                <p class="subtitle">Image Designer &middot; Konten Kreator &middot; Pemimpin Muda</p>
-                <div class="header-tags">
-                    <span><i class="fa-solid fa-location-dot"></i> Cilacap, Jawa Tengah</span>
-                    <span><i class="fa-solid fa-graduation-cap"></i> Teknik Informatika</span>
-                </div>
+                <p class="hero-subtitle">Image Designer | Konten Kreator | Mahasiswa Teknik Informatika</p>
+                <p>Mengintegrasikan estetika visual digital dengan logika pemrograman terstruktur guna menghasilkan karya yang berdampak nyata.</p>
             </div>
         </header>
-        
-        <!-- Gallery -->
-        <div class="gallery">
-            <img src="image/Vito4.jpeg" alt="Vito di Yogyakarta">
-            <video controls>
-                <source src="Vitovideo.mp4" type="video/mp4">
-                Maaf, browser Anda tidak mendukung pemutaran video ini.
-            </video>        
+
+        <!-- Media & Widgets -->
+        <div class="media-widgets">
+            <div class="media-card">
+                <img src="image/Vito4.jpeg" alt="Vito di Yogyakarta">
+            </div>
+            <div class="widget-card">
+                <div class="quote-box">
+                    "Dari layar sederhana, merajut karya bermakna. Konsistensi adalah kunci menaklukkan batas."
+                </div>
+                <div class="audio-box">
+                    <span><i class="fa-solid fa-music"></i> Atmosfer</span>
+                    <audio controls loop>
+                        <source src="pussypodium - akiaura.mp3" type="audio/mpeg">
+                        Browser tidak mendukung audio.
+                    </audio>
+                </div>
+            </div>
         </div>
 
-        <!-- Quote -->
-        <div class="quote">
-            <i class="fa-solid fa-quote-left"></i>
-            <p>"Dari layar kecil, aku belajar bermimpi besar. Dari ketidaktahuan, aku belajar jadi luar biasa."</p>
-        </div>
-
-        <!-- Audio Player -->
-        <div class="audio-player-container">
-            <p><i class="fa-solid fa-music"></i> Putar musik untuk pengalaman:</p>
-            <audio controls loop>
-                <source src="pussypodium - akiaura.mp3" type="audio/mpeg">
-                Maaf, browser Anda tidak mendukung pemutaran audio ini.
-            </audio>
-        </div>
-
-        <!-- About Section -->
+        <!-- Tentang Saya -->
         <section id="tentang">
-            <h2><i class="fa-solid fa-user"></i> Tentang Saya</h2>
-            <div class="about-content">
-                <p>Lahir di Banyumas, 25 April 2009, dan besar di sebuah desa kecil bernama Kedungreja, Cilacap. Tempat yang jauh dari keramaian, tapi justru dari sana aku belajar banyak hal—tentang kesederhanaan, tentang syukur, dan tentang arti cukup.</p>
-                
-                <p>Sebagai anak pertama, aku tumbuh dengan rasa tanggung jawab yang mungkin datang terlalu cepat. Rumah kami tidak besar, hanya aku dan satu adik. Tapi dari situ aku paham bahwa keutuhan keluarga bukan soal jumlah, melainkan seberapa dalam kita saling menjaga dan mendengarkan.</p>
-                
-                <p>Dunia visual jadi cara alami bagiku untuk memahami banyak hal. Warna, bentuk, komposisi—semua terasa lebih mudah dicerna daripada kata-kata. Dari situ ketertarikanku pada desain tumbuh, bukan cuma sebagai hobi, tapi sebagai cara menyampaikan isi kepala yang kadang sulit dijelaskan lewat ucapan.</p>
-                
-                <p>Perjalanan ini tidak selalu mulus. Sejak remaja, aku bergumul dengan hal-hal yang tidak bisa dijelaskan dengan logika biasa. Ada suara-suara yang tidak didengar orang lain, kecemasan yang menyerang diam-diam, dan depresi yang kadang muncul di sela senyuman. Semua itu membentuk cara aku berpikir, merasa, dan memahami orang lain.</p>
-                
-                <p>Tapi aku bukan cerita tentang penderitaan. Aku adalah perjalanan. Dan meskipun jalan ini tidak selalu lurus, aku tetap melangkah—karena bahkan dalam jiwa yang paling retak, masih bisa tumbuh pengertian, keindahan, dan harapan.</p>
-            </div>
-                
-            <h3><i class="fa-solid fa-book"></i> Pendidikan</h3>
+            <h2><i class="fa-solid fa-user-gear"></i> Tentang Saya</h2>
+            <p>Tumbuh di kawasan pedesaan Kedungreja, Cilacap, membentuk saya menjadi pribadi yang menghargai proses, ketekunan, dan kerja keras. Sebagai anak sulung, rasa tanggung jawab telah menjadi bagian integral dalam keseharian saya.</p>
+            
+            <p>Ketertarikan mendalam pada dunia visual bermula dari rasa ingin tahu bagaimana sebuah gambar mampu berbicara lebih lantang daripada kata-kata. Seiring berjalannya waktu, eksplorasi ini berkembang menjadi kemampuan profesional dalam penyuntingan grafis dan pengelolaan konten kreatif.</p>
+
+            <p>Kini, saya memperluas cakrawala dengan menempuh studi Teknik Informatika di Universitas Paramadina Cikarang, menyelaraskan kepekaan artistik dengan ketepatan teknologi komputasi.</p>
+
+            <h3 style="color:#fff; font-size: 1.1rem; margin: 25px 0 15px 0;"><i class="fa-solid fa-graduation-cap" style="color:var(--accent-primary);"></i> Riwayat Pendidikan</h3>
             <div class="timeline">
                 <div class="timeline-item">
-                    <span class="timeline-date">2015 — 2021</span>
-                    <p><b>SD Negeri Kedungreja 05</b></p>
-                    <p>Waktu SD aku tidak terlalu tertarik pada lomba menggambar atau mading. Ketertarikanku justru lebih ke dunia digital, khususnya Photoshop.</p>
+                    <span class="timeline-date">2015 - 2021</span>
+                    <p class="timeline-title">SD Negeri Kedungreja 05</p>
+                    <p>Masa awal eksplorasi digital dan ketertarikan mandiri pada perangkat lunak pengolah grafis.</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">2021 — 2023</span>
-                    <p><b>SMP Muhammadiyah Kedungreja</b></p>
-                    <p>Mulai serius belajar desain digital secara otodidak lewat berbagai tutorial online dan praktik langsung.</p>
+                    <span class="timeline-date">2021 - 2023</span>
+                    <p class="timeline-title">SMP Muhammadiyah Kedungreja</p>
+                    <p>Mulai mendalami teknik desain visual secara otodidak melalui berbagai proyek kreatif digital.</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">2023 — 2026</span>
-                    <p><b>SMA Informatika Muda Kedungreja</b></p>
-                    <p>Fokus mengembangkan kemampuan desain profesional sambil aktif di berbagai organisasi sekolah.</p>
+                    <span class="timeline-date">2023 - 2026</span>
+                    <p class="timeline-title">SMA Informatika Muda Kedungreja</p>
+                    <p>Fokus mengasah portofolio desain sekaligus aktif memegang peran kepemimpinan organisasi sekolah.</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">2026 — 2029</span>
-                    <p><b>Universitas Paramadina Cikarang</b></p>
-                    <p>Mengambil prodi Teknik Informatika dengan visi peluang kerja yang lebih luas.</p>
+                    <span class="timeline-date">2026 - Sekarang</span>
+                    <p class="timeline-title">Universitas Paramadina Cikarang</p>
+                    <p>Menempuh studi strata sarjana di program studi Teknik Informatika.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- Keahlian -->
         <section id="keahlian">
-            <h2><i class="fa-solid fa-star"></i> Keahlian</h2>
-            <p class="section-desc">Berikut adalah kemampuan yang saya kuasai, dibagi berdasarkan tingkat penguasaan.</p>
+            <h2><i class="fa-solid fa-layer-group"></i> Kompetensi & Keahlian</h2>
+            <p>Klasifikasi tingkat penguasaan berdasarkan pengalaman praktik langsung dan jam terbang proyek.</p>
 
-            <!-- Keahlian Utama -->
-            <div class="skill-category">
-                <h3><i class="fa-solid fa-crown"></i> Keahlian Utama</h3>
-                <p class="skill-note">Bidang yang paling saya kuasai dan tekuni sehari-hari.</p>
-                <div class="skills">
-                    <span class="skill skill-expert"><i class="fa-solid fa-pen-nib"></i> Canva</span>
-                    <span class="skill skill-expert"><i class="fa-solid fa-image"></i> Editing Foto</span>
-                    <span class="skill skill-expert"><i class="fa-solid fa-video"></i> Editing Video</span>
-                    <span class="skill skill-expert"><i class="fa-solid fa-wand-magic-sparkles"></i> Picsart</span>
-                    <span class="skill skill-expert"><i class="fa-solid fa-font"></i> Pixellab</span>
-                    <span class="skill skill-expert"><i class="fa-solid fa-bolt"></i> Alight Motion</span>
+            <div class="skills-grid">
+                <!-- Keahlian Spesifik (Sangat Ahli) -->
+                <div class="skill-group featured">
+                    <h3>Keahlian Spesifik <span>Sangat Ahli</span></h3>
+                    <div class="skill-tags">
+                        <div class="tag"><i class="fa-solid fa-pen-nib"></i> Canva Pro & Desain</div>
+                        <div class="tag"><i class="fa-solid fa-image"></i> Editing Foto & Manipulasi</div>
+                        <div class="tag"><i class="fa-solid fa-video"></i> Video Editing (CapCut/Alight Motion)</div>
+                        <div class="tag"><i class="fa-solid fa-bullhorn"></i> Manajemen Konten Kreatif</div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Keahlian Pendukung -->
-            <div class="skill-category">
-                <h3><i class="fa-solid fa-layer-group"></i> Keahlian Pendukung</h3>
-                <p class="skill-note">Kemampuan yang saya pelajari dan gunakan sebagai penunjang.</p>
-                <div class="skills">
-                    <span class="skill skill-intermediate"><i class="fa-brands fa-figma"></i> Figma</span>
-                    <span class="skill skill-intermediate"><i class="fa-solid fa-scissors"></i> Capcut</span>
-                    <span class="skill skill-intermediate"><i class="fa-brands fa-adobe"></i> After Effect</span>
-                    <span class="skill skill-intermediate"><i class="fa-solid fa-pen"></i> Ilustrasi Digital</span>
-                    <span class="skill skill-intermediate"><i class="fa-brands fa-html5"></i> HTML</span>
-                    <span class="skill skill-intermediate"><i class="fa-brands fa-css3-alt"></i> CSS</span>
-                </div>
-            </div>
-
-            <!-- Soft Skills -->
-            <div class="skill-category">
-                <h3><i class="fa-solid fa-people-group"></i> Soft Skills</h3>
-                <p class="skill-note">Kemampuan interpersonal yang saya kembangkan lewat organisasi.</p>
-                <div class="skills">
-                    <span class="skill skill-soft"><i class="fa-solid fa-users"></i> Kepemimpinan</span>
-                    <span class="skill skill-soft"><i class="fa-solid fa-microphone"></i> Public Speaking</span>
-                    <span class="skill skill-soft"><i class="fa-solid fa-share-nodes"></i> Manajemen Media Sosial</span>
-                    <span class="skill skill-soft"><i class="fa-solid fa-bullhorn"></i> Konten Kreatif</span>
+                <!-- Keahlian Pendukung -->
+                <div class="skill-group">
+                    <h3>Keahlian Pendukung <span>Berkembang</span></h3>
+                    <div class="skill-tags">
+                        <div class="tag"><i class="fa-brands fa-figma"></i> Figma Dasar</div>
+                        <div class="tag"><i class="fa-brands fa-html5"></i> HTML Dasar</div>
+                        <div class="tag"><i class="fa-brands fa-css3-alt"></i> CSS Dasar</div>
+                        <div class="tag"><i class="fa-solid fa-users"></i> Kepemimpinan & Publik</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Organization Section -->
+        <!-- Organisasi -->
         <section id="organisasi">
-            <h2><i class="fa-solid fa-sitemap"></i> Perjalanan Organisasi</h2>
-            <p class="section-desc">Perjalanan saya di dunia organisasi dimulai dari titik nol, berkembang lewat proses panjang yang penuh tantangan tapi sangat berharga.</p>
-            
+            <h2><i class="fa-solid fa-users-rectangle"></i> Rekam Jejak Organisasi</h2>
+            <p>Pengalaman kepemimpinan dan kontribusi aktif dalam membangun kedisiplinan serta kolaborasi tim.</p>
+
             <div class="timeline">
                 <div class="timeline-item">
-                    <span class="timeline-date">2023</span>
-                    <p><span class="highlight">Anggota Pasukan Pengibar Bendera</span></p>
-                    <p>Pengalaman pertama mengabdi di upacara bendera, belajar disiplin dan kerja tim yang ketat.</p>
+                    <span class="timeline-date">2024 - 2025</span>
+                    <p class="timeline-title">Wakil Ketua OSIS</p>
+                    <p>Mengoordinasikan program kerja siswa dan menjadi jembatan komunikasi efektif antara pengurus serta pembina sekolah.</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">2024</span>
-                    <p><span class="highlight">Pengibar Bendera Utama</span></p>
-                    <p>Dipercaya memimpin tim pengibar bendera, bertanggung jawab penuh atas kesuksesan upacara.</p>
+                    <span class="timeline-date">2023 - 2024</span>
+                    <p class="timeline-title">Penanggung Jawab Kegiatan Kepramukaan</p>
+                    <p>Memimpin pelatihan kedisiplinan lapangan serta membangun kerja sama tim yang solid.</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">2023 — 2024</span>
-                    <p><span class="highlight">Anggota Divisi Kreatif OSIS</span></p>
-                    <p>Bertugas membuat berbagai materi promosi dan dokumentasi kegiatan OSIS.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-date">2023 — 2024</span>
-                    <p><span class="highlight">Penanggung Jawab Kegiatan Kepramukaan</span></p>
-                    <p>Memimpin berbagai kegiatan kepramukaan, mengembangkan program yang menekankan nilai gotong royong, loyalitas, dan kepemimpinan.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-date">2024 — 2025</span>
-                    <p><span class="highlight">Wakil Ketua OSIS</span></p>
-                    <p>Membantu memimpin seluruh kegiatan OSIS, menjadi penghubung antara pengurus dan pembina.</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="timeline-date">2025 — 2026</span>
-                    <p><span class="highlight">Seksi Kedisiplinan OSIS</span></p>
-                    <p>Bertanggung jawab menegakkan tata tertib sekolah dan membangun budaya disiplin positif.</p>
+                    <span class="timeline-date">2023 - 2024</span>
+                    <p class="timeline-title">Anggota Divisi Kreatif OSIS</p>
+                    <p>Merancang seluruh materi publikasi visual, spanduk, dan dokumentasi digital kegiatan institusi.</p>
                 </div>
             </div>
-
-            <h3><i class="fa-solid fa-trophy"></i> Pencapaian</h3>
-            <ul>
-                <li>Menginisiasi program "Sekolah Bersih" yang mengurangi sampah di lingkungan sekolah hingga 40%</li>
-                <li>Membentuk tim kreatif OSIS yang menghasilkan konten promosi berkualitas</li>
-                <li>Mengembangkan sistem pendisiplinan berbasis mentoring yang lebih manusiawi</li>
-                <li>Meningkatkan partisipasi siswa dalam kegiatan kepramukaan dari 60% menjadi 85%</li>
-            </ul>
         </section>
 
-        <!-- Portfolio Section -->
+        <!-- Portofolio -->
         <section id="portofolio">
-            <h2><i class="fa-solid fa-briefcase"></i> Portofolio Kreatif</h2>
-            <p class="section-desc">Sebagai <span class="highlight">image designer</span> dan <span class="highlight">konten kreator</span>, saya sudah menghasilkan berbagai karya untuk kebutuhan organisasi, personal, dan komersial.</p>
-            
+            <h2><i class="fa-solid fa-briefcase"></i> Portofolio Terpilih</h2>
+            <p>Beberapa proyek nyata yang telah dikerjakan untuk kebutuhan publikasi dan media digital.</p>
+
             <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-icon"><i class="fa-solid fa-palette"></i></div>
-                    <h3>Desain Grafis Organisasi</h3>
-                    <p>Membuat lebih dari 50 desain untuk berbagai kebutuhan OSIS dan sekolah, termasuk:</p>
+                <div class="portfolio-card">
+                    <h3>Desain Visual & Branding</h3>
                     <ul>
-                        <li>Poster kegiatan bulanan</li>
-                        <li>Spanduk acara besar</li>
-                        <li>Sertifikat dan piagam penghargaan</li>
-                        <li>Dokumentasi visual kegiatan</li>
+                        <li>Desain poster kegiatan resmi dan spanduk instansi.</li>
+                        <li>Pembaruan identitas visual dan logo OSIS periode aktif.</li>
+                        <li>Pembuatan sertifikat penghargaan dan aset grafis sosialisasi.</li>
                     </ul>
                 </div>
-
-                <div class="portfolio-item">
-                    <div class="portfolio-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-                    <h3>Konten Media Sosial</h3>
-                    <p>Mengelola konten untuk beberapa akun media sosial dengan total lebih dari 1.000 followers:</p>
+                <div class="portfolio-card">
+                    <h3>Kurasi Media Sosial</h3>
                     <ul>
-                        <li>Akun Sekolah (@smainformatikakedungreja)</li>
-                        <li>Akun OSIS (@osis_sma.informatika_muda)</li>
-                        <li>Akun pribadi desain <a href="https://www.tiktok.com/@webbvx" target="_blank">@webbvx</a></li>
-                    </ul>
-                </div>
-
-                <div class="portfolio-item">
-                    <div class="portfolio-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                    <h3>Proyek Khusus</h3>
-                    <p>Beberapa proyek desain yang paling menantang dan berkesan:</p>
-                    <ul>
-                        <li>Identitas visual untuk acara "Perpisahan Siswa Berprestasi Tahun 2024"</li>
-                        <li>Redesain logo OSIS periode 2024/2025</li>
-                        <li>Kampanye visual "Anti Bullying" di sekolah</li>
+                        <li>Pengelolaan konten media sosial resmi sekolah.</li>
+                        <li>Produksi video pendek kreatif dengan interaksi audiens tinggi.</li>
+                        <li>Pengembangan portofolio kreatif pribadi di <a href="https://www.tiktok.com/@webbvx" target="_blank" style="color:var(--accent-primary);">@webbvx</a>.</li>
                     </ul>
                 </div>
             </div>
-
-            <h3><i class="fa-solid fa-gears"></i> Proses Kreatif</h3>
-            <ol class="process-list">
-                <li><strong>Research</strong> — Memahami kebutuhan klien dan tujuan desain</li>
-                <li><strong>Concepting</strong> — Membuat beberapa alternatif konsep</li>
-                <li><strong>Feedback</strong> — Mendapat masukan dari berbagai pihak</li>
-                <li><strong>Execution</strong> — Menyempurnakan desain berdasarkan feedback</li>
-                <li><strong>Delivery</strong> — Menyerahkan hasil akhir dalam berbagai format yang dibutuhkan</li>
-            </ol>
         </section>
 
-        <!-- Testimonials Section -->
+        <!-- Testimoni -->
         <section>
-            <h2><i class="fa-solid fa-comment-dots"></i> Testimoni</h2>
+            <h2><i class="fa-solid fa-quote-left"></i> Testimoni Rekan & Guru</h2>
             <div class="testimonial-grid">
-                <div class="testimonial">
-                    <i class="fa-solid fa-quote-left testimonial-icon"></i>
-                    <p>"Vito bukan hanya mampu bekerja, tapi juga menginspirasi. Ia hadir bukan untuk tampil, tapi untuk menggerakkan. Dalam setiap proyek yang dikerjakannya, selalu ada nilai lebih yang diberikan."</p>
-                    <div class="testimonial-author">— Pak Sabit Munawar, S.Pd., Waka Kesiswaan</div>
+                <div class="testimonial-card">
+                    <p>"Vito memiliki ketelitian visual yang luar biasa. Setiap karya yang dihasilkan tidak hanya estetis, tetapi juga sangat efektif menyampaikan pesan."</p>
+                    <div class="testimonial-author">- Ibu Triani Febrianti (Guru Fisika)</div>
                 </div>
-
-                <div class="testimonial">
-                    <i class="fa-solid fa-quote-left testimonial-icon"></i>
-                    <p>"Sebagai desainer, Vito sangat detail oriented. Dia tidak hanya membuat yang indah, tapi juga memastikan desainnya efektif menyampaikan pesan. Jarang menemukan siswa dengan pemahaman desain yang begitu matang."</p>
-                    <div class="testimonial-author">— Ibu Triani Febrianti, Guru Fisika</div>
-                </div>
-
-                <div class="testimonial">
-                    <i class="fa-solid fa-quote-left testimonial-icon"></i>
-                    <p>"Kepemimpinan Vito berbeda. Dia memimpin dengan memberi contoh, bukan dengan perintah. Cara dia membimbing junior-juniornya patut diacungi jempol."</p>
-                    <div class="testimonial-author">— Pak Basirun, Guru Bahasa Inggris</div>
+                <div class="testimonial-card">
+                    <p>"Gaya kepemimpinannya inspiratif—menggerakkan melalui keteladanan nyata di lapangan, bukan sekadar instruksi formal."</p>
+                    <div class="testimonial-author">- Pak Sabit Munawar, S.Pd. (Waka Kesiswaan)</div>
                 </div>
             </div>
         </section>
 
-        <!-- Vision & Mission Section -->
-        <section>
-            <h2><i class="fa-solid fa-compass"></i> Visi & Misi</h2>
-            <div class="vm-grid">
-                <div class="vm-card">
-                    <h3><i class="fa-solid fa-eye"></i> Visi</h3>
-                    <p>Menjadi profesional kreatif yang tidak hanya menghasilkan karya estetis, tapi juga bermakna dan memberikan dampak positif bagi masyarakat.</p>
-                </div>
-                <div class="vm-card">
-                    <h3><i class="fa-solid fa-bullseye"></i> Misi</h3>
-                    <ul>
-                        <li>Terus mengembangkan kemampuan desain dan kepemimpinan lewat pembelajaran aktif</li>
-                        <li>Membantu mengangkat potensi kreatif anak muda di daerah lewat berbagai inisiatif</li>
-                        <li>Menciptakan karya yang relevan dengan kebutuhan zaman tapi tetap berpegang pada nilai luhur</li>
-                        <li>Menjadi jembatan antara dunia kreatif digital dengan pendidikan karakter</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
+        <!-- Kontak -->
         <section id="kontak">
-            <h2><i class="fa-solid fa-envelope"></i> Kontak</h2>
-            <div class="contact-info">
+            <h2><i class="fa-solid fa-address-card"></i> Hubungi Saya</h2>
+            <p>Terbuka untuk kolaborasi proyek kreatif, desain visual, maupun diskusi pengembangan digital.</p>
+
+            <div class="contact-grid">
                 <div class="contact-card">
-                    <h3><i class="fa-solid fa-address-card"></i> Informasi Pribadi</h3>
-                    <p><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> radenmas.vbs@gmail.com</p>
-                    <p><i class="fa-solid fa-phone"></i> <strong>No HP:</strong> +62 815-7755-003</p>
-                    <p><i class="fa-solid fa-location-dot"></i> <strong>Alamat:</strong> Jalan Suhada No. 4, RT.3/RW.9, Kedungreja, Cilacap, Jawa Tengah 53263</p>
+                    <h3>Informasi Kontak</h3>
+                    <p><strong>Email:</strong> <a href="mailto:radenmas.vbs@gmail.com">radenmas.vbs@gmail.com</a></p>
+                    <p><strong>WhatsApp:</strong> <a href="https://wa.me/6285890008255" target="_blank">+62 858-9000-8255</a></p>
+                    <p><strong>Lokasi:</strong> Kedungreja, Cilacap, Jawa Tengah</p>
                 </div>
                 <div class="contact-card">
-                    <h3><i class="fa-solid fa-hashtag"></i> Media Sosial</h3>
-                    <p><i class="fa-brands fa-instagram"></i> <strong>Instagram:</strong> <a href="https://www.instagram.com/webvit0/" target="_blank">@webvit0</a></p>
-                    <p><i class="fa-brands fa-whatsapp"></i> <strong>WhatsApp:</strong> <a href="https://wa.me/6285890008255" target="_blank">Vito</a></p>
-                    <p><i class="fa-brands fa-tiktok"></i> <strong>TikTok:</strong> <a href="https://www.tiktok.com/@webbvx" target="_blank">@webbvx</a></p>
+                    <h3>Media Sosial</h3>
+                    <p><strong>Instagram:</strong> <a href="https://www.instagram.com/webvit0/" target="_blank">@webvit0</a></p>
+                    <p><strong>TikTok:</strong> <a href="https://www.tiktok.com/@webbvx" target="_blank">@webbvx</a></p>
                 </div>
             </div>
         </section>
@@ -322,8 +748,42 @@
         <footer>
             <p>&copy; 2026 Vito Brata Sadewa. All Rights Reserved.</p>
         </footer>
+
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = hamburgerBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Smooth Scrolling & Auto-close Menu
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    if (navLinks.classList.contains('active')) {
+                        hamburgerBtn.click();
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
