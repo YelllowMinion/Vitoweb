@@ -537,4 +537,58 @@ footer {
     .contact-grid {
         grid-template-columns: 1fr;
     }
+        /* ==========================================
+    1. VIDEO BACKGROUND FULLSCREEN FIX
+    ========================================== */
+    .video-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -3; /* Memastikan video selalu berada paling belakang */
+        filter: brightness(0.4) blur(3px); /* Menggelapkan & memburamkan halus agar teks mudah dibaca */
+    }
+
+    .video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(135deg, rgba(11, 15, 25, 0.75) 0%, rgba(11, 15, 25, 0.92) 100%);
+        z-index: -2;
+        pointer-events: none;
+    }
+
+
+    /* ==========================================
+    2. EFEK KACA TRANSPARAN (GLASSMORPHISM)
+    ========================================== */
+    /* Terapkan ke semua kontainer/kartu agar video latar terlihat samar-samar di balik kotak */
+    section, 
+    .hero, 
+    .media-card, 
+    .widget-card, 
+    .skill-group, 
+    .portfolio-card, 
+    .testimonial-card, 
+    .contact-card {
+        background: rgba(17, 24, 39, 0.82) !important; /* Warna dasar transparan gelap */
+        backdrop-filter: blur(12px) !important;         /* Efek blur kaca di belakang elemen */
+        -webkit-backdrop-filter: blur(12px) !important; /* Dukungan browser Safari */
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    }
+
+
+    /* ==========================================
+    3. PERBAIKAN Z-INDEX CONTAINER
+    ========================================== */
+    /* Memastikan konten utama berada di atas video background */
+    .container {
+        position: relative;
+        z-index: 1;
+    }
 }
